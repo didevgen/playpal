@@ -1,0 +1,29 @@
+@(level: models.enums.Type, field: models.entities.Field)
+@import models.enums.Type;
+@import tags._;
+
+@level match {
+
+    case Type.CHECK_BOX => {
+        @checkbox(field)
+    }
+    case Type.COMBO_BOX => {
+        @select(field)
+    }
+    case Type.DATE => {
+        @date(field)
+    }
+    case Type.MULTI_LINE_TEXT => {
+        @textarea(field)
+    }
+    case Type.RADIO_BUTTON => {
+        @radio(field)
+    }
+    case Type.SINGLE_LINE_TEXT => {
+        @text(field)
+    }
+    case Type.SLIDER => {
+        @slider(field)
+    }
+
+}

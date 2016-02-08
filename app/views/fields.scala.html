@@ -1,0 +1,47 @@
+@(fields: List[models.entities.Field])
+@main("Field list",true) {
+    <div class="row"><a class="btn btn-primary" href="@routes.FieldController.insertField()" role="button">Insert field <i class="fa fa-plus"></i></a></div>
+    <div class="row"><table class="table table-striped">
+        <tr>
+            <th>Label</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Is Active</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @for(field <- fields) {
+            <tr>
+                <td>@field.getLabel()</td>
+                <td>@field.getType().getValue()</td>
+                <td><input type='checkbox' disabled @if(field.isRequired()){checked="checked"}> </td>
+                <td><input type='checkbox' disabled @if(field.isActive()){checked="checked"}> </td>
+                <td><a class="btn btn-primary" href="@routes.FieldController.getFieldForm(field.getFieldId())" role="button">Edit <i class="fa fa-pencil"></i></a></td>
+                <td><a id ="deleteField" class="btn btn-danger" href="@routes.FieldController.deleteField(field.getFieldId())"  role="button">Delete <i class="fa fa-times"></i></a></td>
+            </tr>
+        }
+
+
+    </table></div>
+    <div class="modal fade " id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="confirm" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

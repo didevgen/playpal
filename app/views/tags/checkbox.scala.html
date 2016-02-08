@@ -1,0 +1,11 @@
+@(field: models.entities.Field)
+<div class="form-group">
+    <label for="label">@field.getLabel</label>
+    <fieldset>
+    @for(option<-field.getOptions) {
+        <label>
+            <input class="opts" name ="field:@field.getFieldId;option:@option.getOptionId" type="checkbox" value="@option.getOptionValue" @if(field.isRequired){required}> @option.getOptionValue
+        </label>
+    }
+    </fieldset>
+</div>

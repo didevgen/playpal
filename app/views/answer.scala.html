@@ -1,0 +1,21 @@
+@(fields: List[models.entities.Field])
+@import tags._;
+@import models.enums.Type;
+@main("Please,answer",false) {
+    <div id="respForm">
+    @helper.form(action = routes.FieldController.updateField()) {
+        @for(field <- fields) {
+            @if(field.isActive) {
+                <div class = "row">
+                @input(field.getType, field)
+                </div>
+            }
+        }
+        <div class ="row">
+            <button id ="submitForm" type="submit" class="btn btn-primary">Save <i class="fa fa-floppy-o"></i></button>
+            <button id ="reset" type="button" class="btn btn-danger">Reset <i class="fa fa-eraser"></i></button>
+        </div>
+
+    }
+    </div>
+}

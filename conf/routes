@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+
+GET     /fields                     @controllers.FieldController.getFields()
+GET     /ws                         @controllers.ws.WSController.doWS()
+GET     /fields/:id                 @controllers.FieldController.getFieldForm(id:Integer)
+POST    /field/remove/:id           @controllers.FieldController.deleteField(id:Integer)
+POST    /field/update/              @controllers.FieldController.updateField()
+GET     /field/insert               @controllers.FieldController.insertField()
+
+POST    /response/submit            @controllers.ResponseController.submitFilledForm()
+GET     /                           @controllers.ResponseController.getFieldsForResponse()
+GET     /responses                  @controllers.ResponseController.getResponses()
+
+GET     /login                      @controllers.LoginController.getLoginForm()
+POST    /login/send                 @controllers.LoginController.submitLoginForm()
+GET     /logout                     @controllers.LoginController.logout()
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               @controllers.Assets.versioned(path="/public", file: Asset)

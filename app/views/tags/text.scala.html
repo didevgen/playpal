@@ -1,0 +1,5 @@
+@(field: models.entities.Field)
+<div class="form-group">
+    <label for="label">@field.getLabel</label>
+    <input name ="field:@field.getFieldId" type="text" class="form-control" @if(field.isRequired){required} placeholder="Input @field.getLabel">
+</div>

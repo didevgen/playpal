@@ -1,0 +1,16 @@
+@(field: models.entities.Field)
+<div class="form-group">
+    <label for="label">@field.getLabel</label>
+    <fieldset>
+    @for(option<-field.getOptions) {
+        <label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name ="field:@field.getFieldId" id="optionsRadios1" value="@option.getOptionValue" @if(field.isRequired){required}>
+                    @option.getOptionValue
+                </label>
+            </div>
+        </label>
+    }
+    </fieldset>
+</div>

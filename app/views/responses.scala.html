@@ -1,0 +1,18 @@
+@(responses: services.ResponseWrapper, headers: List[String])
+@import java.util
+@main("Responses",true) {
+    <div class="row"><table id ="responsesTable" class="table table-striped">
+        <tr>
+            @for(header<-headers) {
+                <th>@header</th>
+            }
+        </tr>
+        @for(response<-responses.getResult.entrySet()) {
+            <tr>
+                @for(value<-response.getValue) {
+                    <td>@value</td>
+                }
+            </tr>
+        }
+    </table></div>
+}

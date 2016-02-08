@@ -1,0 +1,9 @@
+@(field: models.entities.Field)
+<div class="form-group">
+    <label for="label">@field.getLabel</label>
+    <select id ="types" name ="field:@field.getFieldId" class="form-control" @if(field.isRequired){required}>
+        @for(option<-field.getOptions) {
+            <option value="@option.getOptionValue">@option.getOptionValue</option>
+    }
+    </select>
+</div>

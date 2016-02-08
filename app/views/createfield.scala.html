@@ -1,0 +1,57 @@
+@(fieldForm: Form[models.entities.Field], field: models.entities.Field)
+@import helper._;
+@import models.enums.Type;
+@main("Field list",true) {
+    <div class ="panel">
+        <div class = "row ">
+            <h3>Create/Edit field</h3>
+        </div>
+        <div id ="fieldCreate">
+        @helper.form(action = routes.FieldController.updateField()) {
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="label">Label</label>
+                        <input type="text" class="form-control" name ="label" id="label" placeholder="Label" value ="@field.getLabel()" required>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="checkbox form-group">
+                        <label>
+                            <input type="checkbox" value ="true" name = "required" @if(field.isRequired()) {
+                                checked="checked"} > Required
+                        </label>
+                    </div>
+                </div>
+            </div> <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id ="types" name ="type" class="form-control" required>
+                        @for(item <- Type.values()) {
+                            <option value="@item.getTypeName(item.getValue)" @if(field.getType().getValue.equals(item.getValue)) {
+                                selected="selected"}>@item</option>
+                        }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="checkbox form-group">
+                        <label>
+                            <input type="checkbox" name ="active" value ="true" @if(field.isActive()) {
+                                checked="checked"}> Active
+                        </label>
+                    </div>
+                </div>
+            </div>
+            @optionfield(field)
+        </div>
+        <div class ="row">
+            <button id ="save" type="submit" class="btn btn-primary">Save <i class="fa fa-floppy-o"></i></button>
+            <button id ="reset" type="button" class="btn btn-danger">Reset <i class="fa fa-eraser"></i></button>
+        </div>
+}
+</div>
+
+
+}
