@@ -11,36 +11,40 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import services.FieldService;
 import services.UserService;
+import validators.CustomError;
+import validators.Validatable;
+import validators.ValidatorFactory;
 import views.html.createfield;
 import views.html.fields;
+
 import java.util.List;
+
 @Transactional
 public class FieldController extends Controller {
     private FieldService service = new FieldService();
-    private FieldDAO dao = DAOFactory.getDAOFactory(DAOFactory.JPA).getFieldDAO();
+    private FieldDAO dao = DAOFactory.getDAOFactory().getFieldDAO();
     private UserService userService = new UserService();
+    private Validatable validator = new ValidatorFactory().getValidator(ValidatorFactory.FIELD_VALIDATOR);
 
     public Result getFields() {
-        if(!userService.isAutorized()) {
-            return  redirect("/");
+        if (!userService.isAutorized()) {
+            return redirect("/");
         }
         List<Field> fieldList = dao.getAll();
         return ok(fields.render(service.setFieldTypes(fieldList)));
     }
 
     public Result getFieldForm(int id) {
-        if(!userService.isAutorized()) {
-            return  redirect("/");
+        if (!userService.isAutorized()) {
+            return redirect("/");
         }
         Field field = dao.get(id);
-        Form<Field> fieldForm = Form.form(Field.class);
-        fieldForm.fill(field);
-        return ok(createfield.render(fieldForm, field));
+        return ok(createfield.render(field));
     }
 
     public Result insertField() {
-        if(!userService.isAutorized()) {
-            return  redirect("/");
+        if (!userService.isAutorized()) {
+            return redirect("/");
         }
         Field field = new Field();
         field = dao.insert(field);
@@ -48,20 +52,26 @@ public class FieldController extends Controller {
     }
 
     public Result updateField() {
-        if(!userService.isAutorized()) {
-            return  redirect("/");
+        if (!userService.isAutorized()) {
+            return redirect("/");
         }
         JsonNode json = request().body().asJson();
         Field field = Json.fromJson(json, Field.class);
-        dao.update(field);
-        return ok();
+        List<CustomError> errors = validator.validate(field);
+        if (errors.isEmpty()) {
+            dao.update(field);
+            return ok();
+        } else {
+            return badRequest(Json.toJson(errors));
+        }
     }
 
     public Result deleteField(int id) {
-        if(!userService.isAutorized()) {
-            return  redirect("/");
+        if (!userService.isAutorized()) {
+            return redirect("/");
         }
         dao.delete(id);
+        service.checkFieldAmountForResponseDeletion();
         return getFields();
     }
 }

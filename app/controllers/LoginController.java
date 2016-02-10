@@ -23,7 +23,7 @@ import static play.mvc.Results.ok;
 import static play.mvc.Results.redirect;
 @Transactional
 public class LoginController {
-    private UserDAO dao = DAOFactory.getDAOFactory(DAOFactory.JPA).getUserDAO();
+    private UserDAO dao = DAOFactory.getDAOFactory().getUserDAO();
 
     public Result getLoginForm() {
         return ok(login.render(false));

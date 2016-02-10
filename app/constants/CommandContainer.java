@@ -1,5 +1,6 @@
 package constants;
 
+import commands.ChangeResponsesCommand;
 import commands.Command;
 import commands.NotifyAllCommand;
 
@@ -11,6 +12,7 @@ public class CommandContainer {
 
     static {
         commands.put(Commands.NOTIFY_ALL,new NotifyAllCommand());
+        commands.put(Commands.REFRESH_RESPONSES,new ChangeResponsesCommand());
     }
 
     public static Command getCommand(String key) {

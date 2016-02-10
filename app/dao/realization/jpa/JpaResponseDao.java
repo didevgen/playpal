@@ -43,4 +43,9 @@ public class JpaResponseDao implements ResponseDAO {
     public long getResponseCount() {
         return (Long)manager.createQuery("Select Count(e) From Response e").getResultList().get(0);
     }
+
+    @Override
+    public void deleteAll() {
+        manager.createQuery("Delete From Response e").executeUpdate();
+    }
 }

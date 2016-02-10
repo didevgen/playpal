@@ -45,4 +45,9 @@ public class JpaFieldDao implements FieldDAO{
     public List<Field> getAll() {
        return manager.createQuery("Select e from Field e").getResultList();
     }
+
+    @Override
+    public long getFieldsAmount() {
+        return (Long)manager.createQuery("Select Count(e) From Field e").getResultList().get(0);
+    }
 }

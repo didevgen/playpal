@@ -14,7 +14,9 @@ public class ResponseWrapper {
 
     private Map<Integer, List<String>> result = new TreeMap<>();
     private long responseAmount;
+    public  ResponseWrapper() {
 
+    }
     public ResponseWrapper(boolean withResult) {
         JPA.withTransaction(new F.Callback0() {
             @Override
@@ -73,5 +75,9 @@ public class ResponseWrapper {
 
     public long getResponseAmount() {
         return responseAmount;
+    }
+
+    public void setResponseAmount(long responseAmount) {
+        this.responseAmount = responseAmount;
     }
 }

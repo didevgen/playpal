@@ -28,8 +28,8 @@ import java.util.*;
 public class ResponseController extends Controller {
     private ResponseService service = new ResponseService();
     private UserService userService = new UserService();
-    private FieldDAO dao = DAOFactory.getDAOFactory(DAOFactory.JPA).getFieldDAO();
-    private ResponseDAO respDao= DAOFactory.getDAOFactory(DAOFactory.JPA).getResponseDAO();
+    private FieldDAO dao = DAOFactory.getDAOFactory().getFieldDAO();
+    private ResponseDAO respDao= DAOFactory.getDAOFactory().getResponseDAO();
 
     public Result getFieldsForResponse() {
         return ok(answer.render(dao.getAll()));
