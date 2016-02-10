@@ -1,18 +1,29 @@
 @(responses: services.ResponseWrapper, headers: List[String])
 @import java.util
 @main("Responses",true) {
-    <div class="row"><table id ="responsesTable" class="table table-striped">
-        <tr>
-            @for(header<-headers) {
+    @if(responses.getResult.size()==0) {
+        <div class="error">
+            <div class="error-code m-b-10 m-t-20"><i class="fa fa-warning"></i> No data!</div>
+            <div class="error-desc">
+                Nobody has answered yet. Please, wait
+                <div>
+                </div>
+            </div>
+        </div>
+    } else {
+        <div class="row"><table id ="responsesTable" class="table table-striped">
+            <tr>
+            @for(header <- headers) {
                 <th>@header</th>
             }
-        </tr>
-        @for(response<-responses.getResult.entrySet()) {
-            <tr>
-                @for(value<-response.getValue) {
+            </tr>
+            @for(response <- responses.getResult.entrySet()) {
+                <tr>
+                @for(value <- response.getValue) {
                     <td>@value</td>
                 }
-            </tr>
-        }
-    </table></div>
+                </tr>
+            }
+        </table></div>
+    }
 }

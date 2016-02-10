@@ -1,5 +1,7 @@
 package validators;
 
+import models.entities.Field;
+
 import java.util.ArrayList;
 import java.util.List;
 

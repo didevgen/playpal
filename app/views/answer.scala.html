@@ -2,20 +2,31 @@
 @import tags._;
 @import models.enums.Type;
 @main("Please,answer",false) {
-    <div id="respForm">
-    @helper.form(action = routes.FieldController.updateField()) {
-        @for(field <- fields) {
-            @if(field.isActive) {
-                <div class = "row">
-                @input(field.getType, field)
+    @if(fields.size()==0) {
+        <div class="error">
+            <div class="error-code m-b-10 m-t-20"><i class="fa fa-warning"></i>Too early</div>
+            <div class="error-desc">
+                The form in not prepared. Please, wait!
+                <div>
                 </div>
-            }
-        }
-        <div class ="row">
-            <button id ="submitForm" type="submit" class="btn btn-primary">Save <i class="fa fa-floppy-o"></i></button>
-            <button id ="reset" type="button" class="btn btn-danger">Reset <i class="fa fa-eraser"></i></button>
+            </div>
         </div>
+    } else {
+        <div id="respForm">
+        @helper.form(action = routes.FieldController.updateField()) {
+            @for(field <- fields) {
+                @if(field.isActive) {
+                    <div class = "row">
+                    @input(field.getType, field)
+                    </div>
+                }
+            }
+            <div class ="row">
+                <button id ="submitForm" type="submit" class="btn btn-primary">Save <i class="fa fa-floppy-o"></i></button>
+                <button id ="reset" type="button" class="btn btn-danger">Reset <i class="fa fa-eraser"></i></button>
+            </div>
 
+        }
+        </div>
     }
-    </div>
 }
