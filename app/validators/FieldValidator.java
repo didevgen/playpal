@@ -40,27 +40,25 @@ public class FieldValidator implements Validatable {
         error.setMessage(message);
         return error;
     }
+    private CustomError checkNullAndAdd(CustomError error, List<CustomError> errorList) {
+        if (error!=null) {
+            errorList.add(error);
+            error=null;
+        }
+        return error;
+    }
     @Override
     public List<CustomError> validate(Object obj) {
         List<CustomError> errorList = new ArrayList<>();
         Field field = (Field) obj;
         CustomError error = null;
         error = checkLabelError(field);
-        if (error!=null) {
-            errorList.add(error);
-            error=null;
-        }
+        checkNullAndAdd(error,errorList);
         error = checkTypeError(field);
-        if (error!=null) {
-            errorList.add(error);
-            error=null;
-        }
+        checkNullAndAdd(error,errorList);
         for(Option option:field.getOptions()) {
             error=checkOptions(option);
-            if (error!=null) {
-                errorList.add(error);
-            }
-            error = null;
+            error=checkNullAndAdd(error,errorList);
         }
         return errorList;
     }
