@@ -9,7 +9,6 @@ GET     /ws                         @controllers.ws.WSController.doWS()
 GET     /fields/:id                 @controllers.FieldController.getFieldForm(id:Integer)
 POST    /field/remove/:id           @controllers.FieldController.deleteField(id:Integer)
 POST    /field/update/              @controllers.FieldController.updateField()
-GET     /field/insert               @controllers.FieldController.insertField()
 
 POST    /response/submit            @controllers.ResponseController.submitFilledForm()
 GET     /                           @controllers.ResponseController.getFieldsForResponse()

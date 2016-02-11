@@ -19,10 +19,10 @@ public class ErrorHandler extends DefaultHttpErrorHandler {
         super(configuration, environment, sourceMapper, routes);
     }
 
-    @Override
-    public Promise<Result> onServerError(RequestHeader request, Throwable exception) {
-        return Promise.<Result>pure(Results.ok(servererror. render()));
-    }
+//    @Override
+//    public Promise<Result> onServerError(RequestHeader request, Throwable exception) {
+//        return Promise.<Result>pure(Results.ok(servererror. render()));
+//    }
 
     @Override
     protected Promise<Result> onNotFound(RequestHeader request, String message) {

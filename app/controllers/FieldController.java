@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import dao.DAOFactory;
 import dao.contract.FieldDAO;
 import models.entities.Field;
+import models.enums.Type;
 import play.data.Form;
 import play.db.jpa.Transactional;
 import play.libs.Json;
@@ -15,6 +16,7 @@ import validators.CustomError;
 import validators.Validatable;
 import validators.ValidatorFactory;
 import views.html.createfield;
+import views.html.errors.error;
 import views.html.fields;
 
 import java.util.List;
@@ -38,17 +40,16 @@ public class FieldController extends Controller {
         if (!userService.isAutorized()) {
             return redirect("/");
         }
-        Field field = dao.get(id);
-        return ok(createfield.render(field));
-    }
-
-    public Result insertField() {
-        if (!userService.isAutorized()) {
-            return redirect("/");
+        if (id==0) {
+            Field field = new Field();
+            field.setType(Type.SINGLE_LINE_TEXT);
+            return ok(createfield.render(field));
         }
-        Field field = new Field();
-        field = dao.insert(field);
-        return redirect("/fields/" + field.getFieldId());
+        Field field = dao.get(id);
+        if (field==null) {
+            return notFound(error.render("Field is not found",404));
+        }
+        return ok(createfield.render(field));
     }
 
     public Result updateField() {

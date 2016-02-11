@@ -1,6 +1,6 @@
 @(fields: List[models.entities.Field])
 @main("Field list",true) {
-    <div class="row"><a class="btn btn-primary" href="@routes.FieldController.insertField()" role="button">Insert field <i class="fa fa-plus"></i></a></div>
+    <div class="row"><a class="btn btn-primary" href="@routes.FieldController.getFieldForm(0)" role="button">Insert field <i class="fa fa-plus"></i></a></div>
     <div class="row"><table class="table table-striped">
         <tr>
             <th>Label</th>

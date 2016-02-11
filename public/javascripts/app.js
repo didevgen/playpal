@@ -73,7 +73,7 @@ $(document).on('change', '#types', function () {
     }
 });
 $(document).on('click', '#reset', function () {
-    $(':input', '.panel > form')
+    $(':input', '#fieldCreate')
         .not(':button, :submit, :reset, :hidden')
         .val('')
         .removeAttr('checked')
@@ -118,7 +118,7 @@ $(document).on('submit', '#respForm form', function (e) {
     }).then(function successCallback(response) {
         func(response);
     }, function errorCallback(response) {
-
+        console.log(response);
     });
 });
 function sendRequest(urlPattern, dataObj, myFunc) {
@@ -132,7 +132,7 @@ function sendRequest(urlPattern, dataObj, myFunc) {
     }).then(function successCallback(response) {
         myFunc(response);
     }, function errorCallback(response) {
-
+        console.log(response);
     });
 }
 

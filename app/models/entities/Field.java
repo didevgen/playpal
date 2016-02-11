@@ -31,7 +31,7 @@ public class Field {
 
     @Column(name ="type")
     @Enumerated(EnumType.STRING)
-    private Type type = Type.SINGLE_LINE_TEXT;
+    private Type type;
 
     @OneToMany(mappedBy="field", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Answer> answerList = new ArrayList<>();
