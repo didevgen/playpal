@@ -17,8 +17,9 @@ public class FieldValidator implements Validatable {
     }
     private CustomError checkTypeError(Field field) {
         if (field.getType()==null) {
-            System.out.println("type is null");
             return generateError("Type is empty","type");
+        } else if (field.getType().hasOptions()&&field.getOptions().isEmpty()) {
+            return generateError("Type has no options","type");
         }
         else {
             return null;

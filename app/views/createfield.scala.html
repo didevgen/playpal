@@ -13,6 +13,7 @@
                     <div class="form-group">
                         <label for="label">Label</label>
                         <input type="text" class="form-control" name ="label" id="label" placeholder="Label" value ="@field.getLabel()" required>
+                        <span id="errorMessage" class="help-block"></span>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -33,6 +34,7 @@
                                 selected="selected"}>@item</option>
                         }
                         </select>
+                        <span id="errorMessage" class="help-block"></span>
                     </div>
                 </div>
                 <div class="col-xs-6">

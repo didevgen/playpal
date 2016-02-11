@@ -84,6 +84,7 @@ $(document).on('click', '#reset', function () {
 });
 $(document).on('submit', '#fieldCreate form', function (e) {
     e.preventDefault();
+    removeErrors();
     var result = {};
     result.fieldId = getUrlLastParam();
     result.label = $('input[name=label]').val();
@@ -121,6 +122,7 @@ $(document).on('submit', '#respForm form', function (e) {
         console.log(response);
     });
 });
+
 function sendRequest(urlPattern, dataObj, myFunc) {
     $.ajax({
         method: 'POST',
@@ -132,7 +134,7 @@ function sendRequest(urlPattern, dataObj, myFunc) {
     }).then(function successCallback(response) {
         myFunc(response);
     }, function errorCallback(response) {
-        console.log(response);
+        setFieldErrors(response.responseText);
     });
 }
 
@@ -160,3 +162,15 @@ var contains = function (needle) {
     }
     return indexOf.call(this, needle) > -1;
 };
+function removeErrors() {
+    $('.form-group').removeClass('has-error');
+    $('.help-block').text('');
+}
+function setFieldErrors(message) {
+    var errors = JSON.parse(message);
+    errors.forEach(function(item,i,array){
+        var field = $("[name="+item.fieldName+"]");
+        $(field).closest('.form-group').addClass('has-error');
+        $(field).next().text(item.message);
+    });
+}
