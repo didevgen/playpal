@@ -31,7 +31,8 @@ public class Answer {
 
     @Column(name="value")
     private String value;
-
+    @Transient
+    private String fieldName;
     public Answer() {
     }
 
@@ -73,6 +74,14 @@ public class Answer {
 
     public void setResponse(Response response) {
         this.response = response;
+    }
+
+    public String getFieldName() {
+        return fieldName;
+    }
+
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
     }
 
     @Override

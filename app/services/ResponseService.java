@@ -51,6 +51,7 @@ public class ResponseService {
     }
     public Answer parseAnswer(List<Field> fieldList, String key, String value) {
         Answer answer = getAnswer(fieldList,getFieldId(key),getOptionId(key));
+        answer.setFieldName(key);
         answer.setValue(value);
         return answer;
     }

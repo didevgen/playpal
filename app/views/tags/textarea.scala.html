@@ -2,4 +2,5 @@
 <div class="form-group">
     <label for="label">@field.getLabel</label>
     <textarea name ="field:@field.getFieldId" @if(field.isRequired){required} class="form-control"></textarea>
+    <span id="errorMessage" class="help-block"></span>
 </div>

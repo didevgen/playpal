@@ -1,6 +1,5 @@
 package controllers;
 
-import commands.Command;
 import comparators.AnswerComparator;
 import constants.CommandContainer;
 import constants.Commands;
@@ -9,18 +8,19 @@ import dao.contract.FieldDAO;
 import dao.contract.ResponseDAO;
 import models.entities.Answer;
 import models.entities.Field;
-import models.entities.Option;
 import models.entities.Response;
 import play.data.DynamicForm;
-import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.ResponseService;
 import services.ResponseWrapper;
 import services.UserService;
+import validators.CustomError;
+import validators.Validatable;
+import validators.ValidatorFactory;
 import views.html.answer;
-import views.html.index;
 import views.html.responses;
 
 import java.util.*;
@@ -30,6 +30,7 @@ public class ResponseController extends Controller {
     private UserService userService = new UserService();
     private FieldDAO dao = DAOFactory.getDAOFactory().getFieldDAO();
     private ResponseDAO respDao= DAOFactory.getDAOFactory().getResponseDAO();
+    private Validatable validator = new ValidatorFactory().getValidator(ValidatorFactory.RESPONSE_VALIDATOR);
 
     public Result getFieldsForResponse() {
         return ok(answer.render(dao.getAll()));
@@ -47,9 +48,14 @@ public class ResponseController extends Controller {
         List<Answer> result = new ArrayList<>(answerSet);
         Response resp = new Response();
         resp.setAnswers(result);
-        resp = respDao.insert(resp);
-        CommandContainer.getCommand(Commands.NOTIFY_ALL).execute(resp);
-        return ok();
+        List<CustomError> errorList = validator.validate(resp);
+        if (errorList.isEmpty()) {
+            resp = respDao.insert(resp);
+            CommandContainer.getCommand(Commands.NOTIFY_ALL).execute(resp);
+            return ok();
+        } else {
+            return badRequest(Json.toJson(errorList));
+        }
     }
 
     public  Result getResponses() {

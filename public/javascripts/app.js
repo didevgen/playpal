@@ -80,6 +80,7 @@ $(document).on('click', '#reset', function () {
         .removeAttr('selected');
     $(".options").prop('disabled', true);
     $('#options').hide();
+    removeErrors();
 
 });
 $(document).on('submit', '#fieldCreate form', function (e) {
@@ -107,6 +108,7 @@ $(document).on('submit', '#fieldCreate form', function (e) {
 });
 $(document).on('submit', '#respForm form', function (e) {
     e.preventDefault();
+    removeErrors();
     var object = $('form').serialize();
     var func = function () {
         $(".container").empty();
@@ -119,7 +121,7 @@ $(document).on('submit', '#respForm form', function (e) {
     }).then(function successCallback(response) {
         func(response);
     }, function errorCallback(response) {
-        console.log(response);
+        setFieldErrors(response.responseText);
     });
 });
 
@@ -169,8 +171,8 @@ function removeErrors() {
 function setFieldErrors(message) {
     var errors = JSON.parse(message);
     errors.forEach(function(item,i,array){
-        var field = $("[name="+item.fieldName+"]");
+        var field = $("[name=\""+item.fieldName+"\"]");
         $(field).closest('.form-group').addClass('has-error');
-        $(field).next().text(item.message);
+        $(field).closest('.form-group').find('#errorMessage').text(item.message);
     });
 }
