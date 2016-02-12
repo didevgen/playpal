@@ -8,7 +8,11 @@ $(function(){
     function handleMessage(message) {
         if ($.isEmptyObject(message.result)) {
             $('#respAmount').text(message.responseAmount);
-        } else {
+        }
+        if (!($.isEmptyObject(message.result)) && $('#errorBlock').length) {
+            location.reload();
+        }
+        else {
             $('#respAmount').text(message.responseAmount);
             var html = "<tr>"
             $.each(message.result, function(i, n){
