@@ -1,0 +1,1 @@
+INSERT INTO user_table (user_id,login,password,role) Values (1,'admin','21232f297a57a5a743894a0e4a801fc3','ADMIN');

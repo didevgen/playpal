@@ -6,7 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name="user_table")
 public class User {
     @Id
     @GeneratedValue(generator = "increment")

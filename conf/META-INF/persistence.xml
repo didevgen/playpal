@@ -3,23 +3,21 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 
-    <persistence-unit name="defaultPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="local" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <non-jta-data-source>DefaultDS</non-jta-data-source>
-        <class>models.entities.Field</class>
-        <class>models.entities.MultipleChoice</class>
-        <class>models.entities.Answer</class>
-        <class>models.entities.Response</class>
+        <non-jta-data-source>LocalDS</non-jta-data-source>
+
         <properties>
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>-->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.import_files" value="/META-INF/import.sql"/>
+
             <property name="hibernate.connection.CharSet" value="utf8"/>
             <property name="hibernate.connection.characterEncoding" value="utf8"/>
             <property name="hibernate.connection.useUnicode" value="true"/>
+
         </properties>
     </persistence-unit>
-
 </persistence>
