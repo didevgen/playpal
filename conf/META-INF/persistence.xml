@@ -6,7 +6,13 @@
     <persistence-unit name="local" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <non-jta-data-source>LocalDS</non-jta-data-source>
-
+        <class>models.User</class>
+        <class>models.Answer</class>
+        <class>models.Field</class>
+        <class>models.Option</class>
+        <class>models.Response</class>
+        <class>models.Type</class>
+        <class>models.UserRole</class>
         <properties>
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
