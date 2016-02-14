@@ -7,7 +7,7 @@ import play.Play;
 
 public abstract class DAOFactory {
     public static final String JPA = "JPA";
-    public static final String QUERY_DSL = "Query dsl";
+    public static final String QUERY_DSL = "QDSL";
 
     public abstract UserDAO getUserDAO();
     public abstract FieldDAO getFieldDAO();
@@ -19,7 +19,7 @@ public abstract class DAOFactory {
             case JPA:
                 return new JpaDaoFactory();
             case QUERY_DSL:
-                return null;
+                return new QDslDaoFactory();
             default:
                 return null;
         }
@@ -29,7 +29,7 @@ public abstract class DAOFactory {
             case JPA:
                 return new JpaDaoFactory();
             case QUERY_DSL:
-                return null;
+                return new QDslDaoFactory();
             default:
                 return null;
         }

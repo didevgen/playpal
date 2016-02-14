@@ -6,9 +6,9 @@ import constants.Commands;
 import dao.DAOFactory;
 import dao.contract.FieldDAO;
 import dao.contract.ResponseDAO;
-import models.entities.Answer;
-import models.entities.Field;
-import models.entities.Response;
+import models.Answer;
+import models.Field;
+import models.Response;
 import play.data.DynamicForm;
 import play.db.jpa.Transactional;
 import play.libs.Json;
@@ -24,6 +24,8 @@ import views.html.answer;
 import views.html.responses;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 @Transactional
 public class ResponseController extends Controller {
     private ResponseService service = new ResponseService();
@@ -33,7 +35,9 @@ public class ResponseController extends Controller {
     private Validatable validator = new ValidatorFactory().getValidator(ValidatorFactory.RESPONSE_VALIDATOR);
 
     public Result getFieldsForResponse() {
-        return ok(answer.render(dao.getAll()));
+        List<Field> fields = dao.getAll();
+        fields = fields.stream().filter(item->item.isActive()).collect(Collectors.toList());
+        return ok(answer.render(fields));
     }
 
     public Result submitFilledForm() {

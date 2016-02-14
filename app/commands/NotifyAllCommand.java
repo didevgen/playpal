@@ -1,7 +1,7 @@
 package commands;
 
 import controllers.ws.WSContainer;
-import models.entities.Response;
+import models.Response;
 import play.libs.Json;
 import play.mvc.WebSocket;
 import services.ResponseWrapper;

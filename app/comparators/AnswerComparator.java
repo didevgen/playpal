@@ -1,6 +1,6 @@
 package comparators;
 
-import models.entities.Answer;
+import models.Answer;
 
 import java.util.Comparator;
 

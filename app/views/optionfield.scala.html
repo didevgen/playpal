@@ -1,4 +1,4 @@
-@(field:models.entities.Field)
+@(field:models.Field)
 <div class="row" id="options" @if(!field.getType.hasOptions) {
     style="display: none"} >
     <div class="col-xs-6">
@@ -18,6 +18,14 @@
                                 </span>
                             </div>
                         }
+                        <div class="entry input-group col-xs-3">
+                            <input class="form-control options" name="fields" type="text" placeholder="Type option" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-success btn-add" type="button">
+                                    <i class="fa fa-plus-circle"></i>
+                                </button>
+                            </span>
+                        </div>
                     } else {
                         <div class="entry input-group col-xs-3">
                             <input class="form-control options" name="fields" type="text" placeholder="Type option" />

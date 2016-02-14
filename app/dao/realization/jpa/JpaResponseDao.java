@@ -1,7 +1,7 @@
 package dao.realization.jpa;
 
 import dao.contract.ResponseDAO;
-import models.entities.Response;
+import models.Response;
 import play.db.jpa.JPA;
 
 import javax.persistence.EntityManager;

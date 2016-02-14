@@ -1,8 +1,8 @@
 package services;
 
-import models.entities.Answer;
-import models.entities.Field;
-import models.entities.Option;
+import models.Answer;
+import models.Field;
+import models.Option;
 
 import java.util.List;
 

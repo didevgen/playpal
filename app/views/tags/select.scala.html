@@ -1,4 +1,4 @@
-@(field: models.entities.Field)
+@(field: models.Field)
 <div class="form-group">
     <label for="label">@field.getLabel</label>
     <select id ="types" name ="field:@field.getFieldId" class="form-control" @if(field.isRequired){required}>

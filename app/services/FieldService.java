@@ -1,13 +1,10 @@
 package services;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import constants.CommandContainer;
 import constants.Commands;
 import dao.DAOFactory;
-import dao.contract.FieldDAO;
-import models.entities.Field;
-import models.enums.Type;
-import play.Play;
+import models.Field;
+import models.Type;
 
 import java.util.List;
 import java.util.stream.Collectors;

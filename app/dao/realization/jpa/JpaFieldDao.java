@@ -1,8 +1,8 @@
 package dao.realization.jpa;
 
 import dao.contract.FieldDAO;
-import models.entities.Field;
-import models.entities.Option;
+import models.Field;
+import models.Option;
 import play.db.jpa.JPA;
 
 import javax.persistence.EntityManager;

@@ -1,6 +1,6 @@
-@(fields: List[models.entities.Field])
+@(fields: List[models.Field])
 @import tags._;
-@import models.enums.Type;
+@import models.Type;
 @main("Please,answer",false) {
     @if(fields.size()==0) {
         <div class="error">

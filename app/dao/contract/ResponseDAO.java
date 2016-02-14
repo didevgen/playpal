@@ -1,6 +1,6 @@
 package dao.contract;
 
-import models.entities.Response;
+import models.Response;
 
 public interface ResponseDAO extends CRUD<Response>{
     long getResponseCount();

@@ -1,4 +1,4 @@
-@(fields: List[models.entities.Field])
+@(fields: List[models.Field])
     @main("Field list", true) {
         <div class="row fieldInsert">
             <a class="btn btn-primary" href="@routes.FieldController.getFieldForm(0)" role="button">
@@ -41,6 +41,7 @@
 
                     <div class="modal-body">
                         <p>You are about to delete one track, this procedure is irreversible.</p>
+                        <p>Note, in case of deleting all fields, all responses will be deleted also</p>
                         <p>Do you want to proceed?</p>
                     </div>
 

@@ -1,8 +1,7 @@
 package dao.realization.jpa;
 
 import dao.contract.UserDAO;
-import models.entities.Field;
-import models.entities.User;
+import models.User;
 import play.db.jpa.JPA;
 import services.UserService;
 

@@ -1,6 +1,6 @@
 package dao.contract;
 
-import models.entities.User;
+import models.User;
 
 import java.security.NoSuchAlgorithmException;
 

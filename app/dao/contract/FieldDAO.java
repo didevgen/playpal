@@ -1,6 +1,6 @@
 package dao.contract;
 
-import models.entities.Field;
+import models.Field;
 
 public interface FieldDAO extends CRUD<Field> {
     long getFieldsAmount();

@@ -1,11 +1,10 @@
 package validators;
 
-import models.entities.Answer;
-import models.entities.Response;
+import models.Answer;
+import models.Response;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ResponseValidator implements Validatable{
     @Override
