@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-xs-6">
                     <div class="form-group">
-                        <label for="label">Label</label>
+                        <label for="label">Label*</label>
                         <input type="text" class="form-control" name ="label" id="label" placeholder="Label" value ="@field.getLabel()" required>
                         <span id="errorMessage" class="help-block"></span>
                     </div>
@@ -27,7 +27,7 @@
             </div> <div class="row">
                 <div class="col-xs-6">
                     <div class="form-group">
-                        <label for="type">Type</label>
+                        <label for="type">Type*</label>
                         <select id ="types" name ="type" class="form-control" required>
                         @for(item <- Type.values()) {
                             <option value="@item.getTypeName(item.getValue)" @if(field.getType().getValue.equals(item.getValue)) {

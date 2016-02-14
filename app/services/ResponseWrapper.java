@@ -49,7 +49,7 @@ public class ResponseWrapper {
     private String findFieldValueInResponse(Field field, Response response) {
         for (Answer answer : response.getAnswers()) {
             if (answer.getField().getFieldId() == field.getFieldId()) {
-                return answer.getValue();
+                return answer.getValue().equals("")?"N/A":answer.getValue();
             }
         }
         return "N/A";

@@ -81,7 +81,16 @@ $(document).on('click', '#reset', function () {
     $(".options").prop('disabled', true);
     $('#options').hide();
     removeErrors();
-
+});
+$(document).on('click', '#clearForm', function () {
+    $(':input', '#respForm')
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
+    $(".options").prop('disabled', true);
+    $('#options').hide();
+    removeErrors();
 });
 $(document).on('submit', '#fieldCreate form', function (e) {
     e.preventDefault();

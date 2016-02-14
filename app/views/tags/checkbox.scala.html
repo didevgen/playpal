@@ -1,6 +1,6 @@
 @(field: models.Field)
 <div class="form-group">
-    <label for="label">@field.getLabel</label>
+    <label for="label">@field.getLabel@if(field.isRequired){*}</label>
     <fieldset>
     @for(option<-field.getOptions) {
         <label>
