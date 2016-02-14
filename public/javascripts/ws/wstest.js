@@ -1,6 +1,6 @@
 $(function(){
     var WS = window['MozWebSocket'] ? window['MozWebSocket'] : WebSocket;
-    var socket = new WS('ws://' + window.location.host + '/ws');
+    var socket = new WS('wss://' + window.location.host + '/ws');
     var writeMessages = function(event){
         handleMessage(JSON.parse(event.data));
     }
