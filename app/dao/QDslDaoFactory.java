@@ -6,7 +6,9 @@ import dao.contract.UserDAO;
 import dao.realization.qdsl.QDslFieldDao;
 import dao.realization.qdsl.QDslResponseDao;
 import dao.realization.qdsl.QDslUserDao;
-
+/**
+ * DAOFactory which returns Querydsl implementation for db-operations
+ */
 public class QDslDaoFactory extends DAOFactory{
     @Override
     public UserDAO getUserDAO() {

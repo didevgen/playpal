@@ -10,6 +10,9 @@ import play.db.jpa.JPA;
 import play.libs.F;
 import java.util.*;
 
+/**
+ * Class-wrapper for response. Generally for websocket data
+ */
 public class ResponseWrapper {
 
     private Map<Integer, List<String>> result = new TreeMap<>();
@@ -17,6 +20,13 @@ public class ResponseWrapper {
     public  ResponseWrapper() {
 
     }
+
+    /**
+     * Fills the list of responses (Key - responseId, Value - List of answers. Also has N/A answers)
+     * @param withResult means which data will be sent to the client
+     *                   In case of true will send responseamount and also responses
+     *                   Otherwise - only responseAmount
+     */
     public ResponseWrapper(boolean withResult) {
         JPA.withTransaction(new F.Callback0() {
             @Override
@@ -34,6 +44,10 @@ public class ResponseWrapper {
         });
     }
 
+    /**
+     * Fills the list of responses (Key - responseId, Value - List of answers. Also has N/A answers)
+     * @param response
+     */
     public ResponseWrapper(Response response) {
         FieldDAO dao = DAOFactory.getDAOFactory(DAOFactory.JPA).getFieldDAO();
         ResponseDAO respDao = DAOFactory.getDAOFactory(DAOFactory.JPA).getResponseDAO();

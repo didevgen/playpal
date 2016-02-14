@@ -11,6 +11,13 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ Application is designed to collect data from users. Form for data collection will have generic number of fields. Field is an entity from database. Field has next fields:
+ Label - string
+ Type - enumeration (single line text, multi line text, radio button, check box, combo box, date, slider)
+ Required - boolean (response to this field will be required)
+ Is Active - boolean (user make field not active for any reason, it will remove field from the form).
+ */
 @Entity
 @Table(name = "field")
 public class Field {

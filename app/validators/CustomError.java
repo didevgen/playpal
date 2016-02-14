@@ -1,5 +1,8 @@
 package validators;
 
+/**
+ * Entity for validation errors
+ */
 public class CustomError {
     private String message;
     private String causedBy;

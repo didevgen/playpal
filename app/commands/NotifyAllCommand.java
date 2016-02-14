@@ -6,6 +6,9 @@ import play.libs.Json;
 import play.mvc.WebSocket;
 import services.ResponseWrapper;
 
+/**
+ * Command for notifying all subscribers about event on server
+ */
 public class NotifyAllCommand implements  Command{
     @Override
     public void execute(Object arg) {

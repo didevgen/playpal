@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Type of the input
+ */
 public enum Type {
     SINGLE_LINE_TEXT("Single line text"), MULTI_LINE_TEXT("Textarea"),
     RADIO_BUTTON("Radio button",true), CHECK_BOX("Check box",true),

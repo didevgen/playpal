@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public class JpaResponseDao implements ResponseDAO {
-    EntityManager manager = JPA.em();
+    private EntityManager manager = JPA.em();
     @Override
     public Response insert(Response resp) {
         resp.getAnswers().forEach(item->item.setResponse(resp));

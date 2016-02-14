@@ -3,6 +3,9 @@ package validators;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Validation factory (Abstract factory implementation)
+ */
 public class ValidatorFactory {
 
     public static final String FIELD_VALIDATOR = "Field validator";

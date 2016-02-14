@@ -18,15 +18,26 @@ import views.html.createfield;
 import views.html.errors.error;
 import views.html.fields;
 
+import javax.inject.Inject;
 import java.util.List;
 
+/**
+ * Controller class for handling requests for field data
+ */
 @Transactional
 public class FieldController extends Controller {
-    private FieldService service = new FieldService();
-    private FieldDAO dao = DAOFactory.getDAOFactory().getFieldDAO();
-    private UserService userService = new UserService();
     private Validatable validator = new ValidatorFactory().getValidator(ValidatorFactory.FIELD_VALIDATOR);
+    private FieldDAO dao = DAOFactory.getDAOFactory().getFieldDAO();
 
+    @Inject
+    private FieldService service;
+    @Inject
+    private UserService userService;
+
+    /**
+     * Gets all fields from the database
+     * @return rendering to the ../fields page
+     */
     public Result getFields() {
         if (!userService.isAutorized()) {
             return redirect("/");
@@ -35,6 +46,11 @@ public class FieldController extends Controller {
         return ok(fields.render(service.setFieldTypes(fieldList)));
     }
 
+    /**
+     * Method for updating/creating new field. (For updating will give field from the database)
+     * @param id - 0 means insert another - update. If field doesn't exist - shows 404 error page
+     * @return
+     */
     public Result getFieldForm(int id) {
         if (!userService.isAutorized()) {
             return redirect("/");
@@ -51,6 +67,11 @@ public class FieldController extends Controller {
         return ok(createfield.render(field));
     }
 
+    /**
+     * Method for handling form submission
+     * In case of validation fails will return badRequest
+     * @return
+     */
     public Result updateField() {
         if (!userService.isAutorized()) {
             return redirect("/");
@@ -66,6 +87,11 @@ public class FieldController extends Controller {
         }
     }
 
+    /**
+     * Deletes field from the database. Will delete all responses in case of zero amount of fields
+     * @param id - identifier of the field
+     * @return
+     */
     public Result deleteField(int id) {
         if (!userService.isAutorized()) {
             return redirect("/");

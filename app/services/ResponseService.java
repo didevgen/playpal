@@ -33,6 +33,9 @@ public class ResponseService {
         return null;
     }
     private Option getOptionById(Field field, int optionId) {
+        if (field==null) {
+            return null;
+        }
         for (Option option : field.getOptions()) {
             if (option.getOptionId()==optionId) {
                 return option;
@@ -49,6 +52,14 @@ public class ResponseService {
         }
         return answer;
     }
+
+    /**
+     * Parses answer from the request and converts it into the models.Answer
+     * @param fieldList the list of already existing fields
+     * @param key - key of the request
+     * @param value - value of the requested data
+     * @return
+     */
     public Answer parseAnswer(List<Field> fieldList, String key, String value) {
         Answer answer = getAnswer(fieldList,getFieldId(key),getOptionId(key));
         answer.setFieldName(key);

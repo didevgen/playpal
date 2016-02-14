@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class JpaUserDao implements UserDAO{
-    EntityManager manager = JPA.em();
+    private EntityManager manager = JPA.em();
     @Override
     public User insert(User obj) {
         manager.persist(obj);

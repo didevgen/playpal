@@ -79,6 +79,11 @@ public class FieldValidator implements Validatable {
         return error;
     }
 
+    /**
+     * Validates field and returns error list
+     * @param obj must be models.Field
+     * @return List of the errors which will be shown in case of bad request
+     */
     @Override
     public List<CustomError> validate(Object obj) {
         List<CustomError> errorList = new ArrayList<>();

@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public class QDslResponseDao implements ResponseDAO{
-    EntityManager manager = JPA.em();
+    private EntityManager manager = JPA.em();
     @Override
     public long getResponseCount() {
         QResponse response = QResponse.response;

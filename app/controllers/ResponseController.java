@@ -23,23 +23,37 @@ import validators.ValidatorFactory;
 import views.html.answer;
 import views.html.responses;
 
+import javax.inject.Inject;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for handling the information about response
+ */
 @Transactional
 public class ResponseController extends Controller {
-    private ResponseService service = new ResponseService();
-    private UserService userService = new UserService();
+    @Inject
+    private ResponseService service;
+    @Inject
+    private UserService userService;
     private FieldDAO dao = DAOFactory.getDAOFactory().getFieldDAO();
     private ResponseDAO respDao= DAOFactory.getDAOFactory().getResponseDAO();
     private Validatable validator = new ValidatorFactory().getValidator(ValidatorFactory.RESPONSE_VALIDATOR);
 
+    /**
+     * Retrieves all existing fields for generating response in page ../responses
+     * @return
+     */
     public Result getFieldsForResponse() {
         List<Field> fields = dao.getAll();
         fields = fields.stream().filter(item->item.isActive()).collect(Collectors.toList());
         return ok(answer.render(fields));
     }
 
+    /**
+     * Validates and persists response data. In success will execute Notify all command
+     * @return
+     */
     public Result submitFilledForm() {
         DynamicForm dynForm = new DynamicForm().bindFromRequest();
         Map<String, String> map = dynForm.data();
@@ -62,6 +76,10 @@ public class ResponseController extends Controller {
         }
     }
 
+    /**
+     * Retrieves response list
+     * @return
+     */
     public  Result getResponses() {
         if(!userService.isAutorized()) {
             return  redirect("/");

@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class QDslUserDao implements UserDAO{
-    EntityManager manager = JPA.em();
+    private EntityManager manager = JPA.em();
     @Override
     public User getUserByLoginAndPassword(String login, String password) throws NoSuchAlgorithmException {
         QUser user = QUser.user;

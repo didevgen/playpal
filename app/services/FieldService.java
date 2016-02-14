@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FieldService {
+
     public List<Field> setFieldTypes(List<Field> src) {
         return src.stream().map(item -> {
             item.setType(Type.valueOf(item.getType().name()));
@@ -20,6 +21,9 @@ public class FieldService {
         return obj==null;
     }
 
+    /**
+     * If amount of fields is zero will refresh response amount
+     */
     public void checkFieldAmountForResponseDeletion() {
         DAOFactory fatory = DAOFactory.getDAOFactory();
         if (fatory.getFieldDAO().getFieldsAmount()==0) {

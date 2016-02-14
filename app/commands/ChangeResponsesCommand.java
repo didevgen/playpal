@@ -5,6 +5,9 @@ import play.libs.Json;
 import play.mvc.WebSocket;
 import services.ResponseWrapper;
 
+/**
+ * Command for changing amount of response badge on client side.
+ */
 public class ChangeResponsesCommand implements Command{
     @Override
     public void execute(Object arg) {

@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResponseValidator implements Validatable{
+    /**
+     * Validates the response for errors
+     * @param obj must be models.Response
+     * @return
+     */
     @Override
     public List<CustomError> validate(Object obj) {
         List<CustomError> errors = new ArrayList<>();

@@ -7,6 +7,9 @@ import dao.realization.jpa.JpaFieldDao;
 import dao.realization.jpa.JpaResponseDao;
 import dao.realization.jpa.JpaUserDao;
 
+/**
+ * DAOFactory which returns JPA implementation for db-operations
+ */
 public class JpaDaoFactory extends DAOFactory {
     @Override
     public UserDAO getUserDAO() {

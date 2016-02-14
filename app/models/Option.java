@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Option for field which has multiple choices
+ */
 @Entity
 @Table(name = "field_option")
 public class Option {

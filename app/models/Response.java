@@ -9,6 +9,9 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fulfilled fields (list of fields with data)
+ */
 @Entity
 @Table(name="response")
 public class Response {

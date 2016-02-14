@@ -4,6 +4,10 @@ import models.Answer;
 
 import java.util.Comparator;
 
+/**
+ * Comparator for TreeSet<Answer>. Was created because of changing values of Answers during the inserting new values
+ * I.E. in case of having field with multiple choice the new value must be added to the previous.
+ */
 public class AnswerComparator implements Comparator<Answer> {
     @Override
     public int compare(Answer o1, Answer o2) {

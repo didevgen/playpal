@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public class QDslFieldDao implements FieldDAO{
-    EntityManager manager = JPA.em();
+    private EntityManager manager = JPA.em();
     @Override
     public long getFieldsAmount() {
         QField field = QField.field;

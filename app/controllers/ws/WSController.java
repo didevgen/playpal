@@ -5,6 +5,9 @@ import play.mvc.WebSocket;
 
 import javax.transaction.Transactional;
 
+/**
+ * Handles all connections via websocket
+ */
 public class WSController {
 
     public WebSocket<String> doWS(){

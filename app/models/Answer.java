@@ -8,6 +8,9 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fulfilled field (single field with data)
+ */
 @Entity
 @Table(name ="answer")
 public class Answer {

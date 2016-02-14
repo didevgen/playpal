@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class JpaFieldDao implements FieldDAO{
-    EntityManager manager = JPA.em();
+    private EntityManager manager = JPA.em();
     @Override
     public Field insert(Field obj) {
         manager.persist(obj);
