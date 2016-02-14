@@ -65,11 +65,26 @@ $(document).on('change', '#types', function () {
         $('.options').show();
         $('.options').prop('required',true);
         $(".options").prop('disabled', false);
-    } else {
+        $(".sliderOptions").remove();
+        removeErrors();
+    } else if ($(this).val()==="SLIDER") {
         $('#options').hide();
         $(".options").hide();
         $('.options').prop('required',false);
         $(".options").prop('disabled', true);
+        var innerHtml = "<div class=\"sliderOptions\"> <div class=\"entry input-group col-xs-3\">"+
+            "<input class=\"form-control options\" name=\"fields\" type=\"text\" placeholder=\"Insert min value\" required=\"\">"+
+            "<input class=\"form-control options\" name=\"fields\" type=\"text\" placeholder=\"Insert max value\" required=\"\"></div> </div>";
+        $('#lastRow').after(innerHtml);
+        removeErrors();
+    }
+    else {
+        $('#options').hide();
+        $(".options").hide();
+        $('.options').prop('required',false);
+        $(".options").prop('disabled', true);
+        $(".sliderOptions").remove();
+        removeErrors();
     }
 });
 $(document).on('click', '#reset', function () {
@@ -80,6 +95,7 @@ $(document).on('click', '#reset', function () {
         .removeAttr('selected');
     $(".options").prop('disabled', true);
     $('#options').hide();
+    $(".sliderOptions").remove();
     removeErrors();
 });
 $(document).on('click', '#clearForm', function () {
@@ -182,6 +198,7 @@ function setFieldErrors(message) {
     errors.forEach(function(item,i,array){
         var field = $("[name=\""+item.fieldName+"\"]");
         $(field).closest('.form-group').addClass('has-error');
-        $(field).closest('.form-group').find('#errorMessage').text(item.message);
+        var element = $(field).closest('.form-group').find('#errorMessage');
+        element.text(element.text() + " " + item.message);
     });
 }

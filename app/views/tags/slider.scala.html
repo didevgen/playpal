@@ -1,6 +1,6 @@
 @(field: models.Field)
 <div class="form-group">
     <label for="ex1">@field.getLabel@if(field.isRequired){*}</label>
-    <input name="field:@field.getFieldId" @if(field.isRequired){required} id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1"/>
+    <input name="field:@field.getFieldId" @if(field.isRequired){required} id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="@field.getOptions.get(0).getOptionValue" data-slider-max="@field.getOptions.get(1).getOptionValue" data-slider-step="1"/>
     <span id="errorMessage" class="help-block"></span>
 </div>

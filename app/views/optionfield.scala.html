@@ -1,4 +1,10 @@
-@(field:models.Field)
+@(field: models.Field)
+@if(field.getType.getValue.equals("Slider")) {
+    <div class="sliderOptions"> <div class="entry input-group col-xs-3">
+        <input class="form-control options" name="fields" type="text" placeholder="Insert min value" required="" value="@field.getOptions.get(0).getOptionValue">
+        <input class="form-control options" name="fields" type="text" placeholder="Insert max value" required="" value="@field.getOptions.get(1).getOptionValue"></div> </div>
+    <span id="errorMessage" class="help-block"></span>
+}
 <div class="row" id="options" @if(!field.getType.hasOptions) {
     style="display: none"} >
     <div class="col-xs-6">
@@ -7,8 +13,8 @@
                 <div class="control-group form-group" id="fields">
                     <label class="control-label" for="field1">Options</label>
                     <div class="controls">
-                    @if(!field.getOptions().isEmpty) {
-                        @for(option<-field.getOptions) {
+                    @if(!field.getOptions().isEmpty && !field.getType.getValue.equals("Slider"))  {
+                        @for(option <- field.getOptions) {
                             <div class="entry input-group col-xs-3">
                                 <input class="form-control options" name="fields" type="text" placeholder="Type option" value ="@option.getOptionValue" />
                                 <span class="input-group-btn">
