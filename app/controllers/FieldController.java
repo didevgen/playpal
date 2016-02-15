@@ -11,7 +11,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import services.FieldService;
 import services.UserService;
-import validators.CustomError;
+import validators.ValidationError;
 import validators.Validatable;
 import validators.ValidatorFactory;
 import views.html.createfield;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Transactional
 public class FieldController extends Controller {
-    private Validatable validator = new ValidatorFactory().getValidator(ValidatorFactory.FIELD_VALIDATOR);
+    private Validatable validator;
     private FieldDAO dao = DAOFactory.getDAOFactory().getFieldDAO();
 
     @Inject
@@ -78,7 +78,8 @@ public class FieldController extends Controller {
         }
         JsonNode json = request().body().asJson();
         Field field = Json.fromJson(json, Field.class);
-        List<CustomError> errors = validator.validate(field);
+        validator = new ValidatorFactory().getValidator(ValidatorFactory.FIELD_VALIDATOR);
+        List<ValidationError> errors = validator.validate(field);
         if (errors.isEmpty()) {
             dao.update(field);
             return ok();

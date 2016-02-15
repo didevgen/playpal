@@ -1,6 +1,9 @@
 package models;
 
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -42,20 +45,19 @@ public class Response {
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Response response = (Response) o;
-
-        return !(responseId != null ? !responseId.equals(response.responseId) : response.responseId != null);
-
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
     }
 
     @Override
     public int hashCode() {
-        return responseId != null ? responseId.hashCode() : 0;
+        return HashCodeBuilder.reflectionHashCode(this);
     }
+
 }

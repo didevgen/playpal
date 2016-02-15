@@ -17,7 +17,7 @@ import play.mvc.Result;
 import services.ResponseService;
 import services.ResponseWrapper;
 import services.UserService;
-import validators.CustomError;
+import validators.ValidationError;
 import validators.Validatable;
 import validators.ValidatorFactory;
 import views.html.answer;
@@ -38,7 +38,7 @@ public class ResponseController extends Controller {
     private UserService userService;
     private FieldDAO dao = DAOFactory.getDAOFactory().getFieldDAO();
     private ResponseDAO respDao= DAOFactory.getDAOFactory().getResponseDAO();
-    private Validatable validator = new ValidatorFactory().getValidator(ValidatorFactory.RESPONSE_VALIDATOR);
+    private Validatable validator;
 
     /**
      * Retrieves all existing fields for generating response in page ../responses
@@ -66,7 +66,8 @@ public class ResponseController extends Controller {
         List<Answer> result = new ArrayList<>(answerSet);
         Response resp = new Response();
         resp.setAnswers(result);
-        List<CustomError> errorList = validator.validate(resp);
+        validator = new ValidatorFactory().getValidator(ValidatorFactory.RESPONSE_VALIDATOR);
+        List<ValidationError> errorList = validator.validate(resp);
         if (errorList.isEmpty()) {
             resp = respDao.insert(resp);
             CommandContainer.getCommand(Commands.NOTIFY_ALL).execute(resp);

@@ -3,7 +3,7 @@ package validators;
 /**
  * Entity for validation errors
  */
-public class CustomError {
+public class ValidationError {
     private String message;
     private String causedBy;
     private String fieldName;

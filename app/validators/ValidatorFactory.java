@@ -21,7 +21,7 @@ public class ValidatorFactory {
             default:{
                 return new Validatable() {
                     @Override
-                    public List<CustomError> validate(Object obj) {
+                    public List<ValidationError> validate(Object obj) {
                         return new ArrayList<>();
                     }
                 };

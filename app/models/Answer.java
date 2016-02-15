@@ -1,5 +1,8 @@
 package models;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -88,28 +91,16 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "Answer{" +
-                "answerId=" + answerId +
-                ", value='" + value + '\'' +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Answer answer = (Answer) o;
-
-        if (!answerId.equals(answer.answerId)) return false;
-        return !(value != null ? !value.equals(answer.value) : answer.value != null);
-
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
     }
 
     @Override
     public int hashCode() {
-        int result = answerId.hashCode();
-        result = 31 * result + (value != null ? value.hashCode() : 0);
-        return result;
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 }

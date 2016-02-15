@@ -1,5 +1,8 @@
 package models;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -106,19 +109,13 @@ public class Field {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Field field = (Field) o;
-
-        return !(fieldId != null ? !fieldId.equals(field.fieldId) : field.fieldId != null);
-
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
     }
 
     @Override
     public int hashCode() {
-        return fieldId != null ? fieldId.hashCode() : 0;
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override

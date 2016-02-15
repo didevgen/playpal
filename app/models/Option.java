@@ -1,6 +1,9 @@
 package models;
 
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -68,28 +71,17 @@ public class Option {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
-        Option option = (Option) o;
-
-        if (optionId != null ? !optionId.equals(option.optionId) : option.optionId != null) return false;
-        return !(optionValue != null ? !optionValue.equals(option.optionValue) : option.optionValue != null);
-
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
     }
 
     @Override
     public int hashCode() {
-        int result = optionId != null ? optionId.hashCode() : 0;
-        result = 31 * result + (optionValue != null ? optionValue.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Option{" +
-                "optionValue='" + optionValue + '\'' +
-                '}';
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 }

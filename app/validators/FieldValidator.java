@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FieldValidator implements Validatable {
-    private CustomError checkLabelError(Field field) {
+    private ValidationError checkLabelError(Field field) {
         if (field.getLabel().isEmpty()) {
             return generateError("Label is empty", "label");
         } else {
@@ -16,7 +16,7 @@ public class FieldValidator implements Validatable {
         }
     }
 
-    private CustomError checkTypeError(Field field) {
+    private ValidationError checkTypeError(Field field) {
         if (field.getType() == null) {
             return generateError("Type is empty", "type");
         } else if (field.getType().hasOptions() && field.getOptions().isEmpty()) {
@@ -39,9 +39,9 @@ public class FieldValidator implements Validatable {
         return field.getOptions().get(number).getOptionValue();
     }
 
-    private List<CustomError> checkSliderError(Field field) {
-        List<CustomError> errorList = new ArrayList<>();
-        if (field.getType().equals(Type.SLIDER)) {
+    private List<ValidationError> checkSliderError(Field field) {
+        List<ValidationError> errorList = new ArrayList<>();
+        if (field.getType()!=null && field.getType().equals(Type.SLIDER)) {
             if (field.getOptions().size() != 2) {
                 errorList.add(generateError("Slider must have min and max value", "type"));
             } else {
@@ -56,7 +56,7 @@ public class FieldValidator implements Validatable {
         return errorList;
     }
 
-    private CustomError checkOptions(Option option) {
+    private ValidationError checkOptions(Option option) {
         if (option.getOptionValue().isEmpty()) {
             return generateError("Option is empty", "options");
         } else {
@@ -64,14 +64,14 @@ public class FieldValidator implements Validatable {
         }
     }
 
-    private CustomError generateError(String message, String fieldName) {
-        CustomError error = new CustomError();
+    private ValidationError generateError(String message, String fieldName) {
+        ValidationError error = new ValidationError();
         error.setFieldName(fieldName);
         error.setMessage(message);
         return error;
     }
 
-    private CustomError checkNullAndAdd(CustomError error, List<CustomError> errorList) {
+    private ValidationError checkNullAndAdd(ValidationError error, List<ValidationError> errorList) {
         if (error != null) {
             errorList.add(error);
             error = null;
@@ -85,10 +85,10 @@ public class FieldValidator implements Validatable {
      * @return List of the errors which will be shown in case of bad request
      */
     @Override
-    public List<CustomError> validate(Object obj) {
-        List<CustomError> errorList = new ArrayList<>();
+    public List<ValidationError> validate(Object obj) {
+        List<ValidationError> errorList = new ArrayList<>();
         Field field = (Field) obj;
-        CustomError error = null;
+        ValidationError error = null;
         error = checkLabelError(field);
         checkNullAndAdd(error, errorList);
         error = checkTypeError(field);
